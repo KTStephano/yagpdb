@@ -205,10 +205,10 @@ func (s *Session) innerDoRequest(method, urlStr, contentType string, b []byte, h
 		}
 	}()
 
-	if s.Debug {
-		log.Printf("API REQUEST %8s :: %s\n", method, urlStr)
-		log.Printf("API REQUEST  PAYLOAD :: [%s]\n", string(b))
-	}
+	// if s.Debug {
+	log.Printf("API REQUEST %8s :: %s\n", method, urlStr)
+	log.Printf("API REQUEST  PAYLOAD :: [%s]\n", string(b))
+	//}
 
 	req, err := http.NewRequest(method, urlStr, bytes.NewReader(b))
 	if err != nil {
@@ -243,11 +243,11 @@ func (s *Session) innerDoRequest(method, urlStr, contentType string, b []byte, h
 	ctx := context.WithValue(req.Context(), CtxKeyRatelimitBucket, bucket)
 	req = req.WithContext(ctx)
 
-	if s.Debug {
-		for k, v := range req.Header {
-			log.Printf("API REQUEST   HEADER :: [%s] = %+v\n", k, v)
-		}
+	// if s.Debug {
+	for k, v := range req.Header {
+		log.Printf("API REQUEST   HEADER :: [%s] = %+v\n", k, v)
 	}
+	// }
 
 	resp, err := s.Client.Do(req)
 	if err == nil {
