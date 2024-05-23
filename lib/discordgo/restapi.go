@@ -138,14 +138,14 @@ func (s *Session) doRequest(method, urlStr, contentType string, b []byte, header
 		return nil, true, false, err
 	}
 
-	if s.Debug {
+	// if s.Debug {
 
-		log.Printf("API RESPONSE  STATUS :: %s\n", resp.Status)
-		for k, v := range resp.Header {
-			log.Printf("API RESPONSE  HEADER :: [%s] = %+v\n", k, v)
-		}
-		log.Printf("API RESPONSE    BODY :: [%s]\n\n\n", response)
+	log.Printf("API RESPONSE  STATUS :: %s\n", resp.Status)
+	for k, v := range resp.Header {
+		log.Printf("API RESPONSE  HEADER :: [%s] = %+v\n", k, v)
 	}
+	log.Printf("API RESPONSE    BODY :: [%s]\n\n\n", response)
+	//}
 
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		return
